@@ -8,19 +8,16 @@ const pathToFolderWithStyles = path.join(__dirname, 'styles');
 async function createBundleCss(folderWithStyles, folderWithBundle) {
   const bundlePath = path.join(folderWithBundle, 'bundle.css');
   await fsp.writeFile(bundlePath, '');
-  const bundleWriteStream = fs.createWriteStream(bundlePath);
 
   const entries = await fsp.readdir(folderWithStyles);
 
   for (const entry of entries) {
     if (path.extname(entry) === '.css') {
         const filePath = path.join(folderWithStyles, entry);
-        const data = (await fsp.readFile(filePath)).toString();
-        bundleWriteStream.write(`${data}\n`);
+        const data = await fsp.readFile(filePath, 'utf-8');
+        await fsp.appendFile(bundlePath, data);
     }
   }
-
-  bundleWriteStream.end();
 }
 
 createBundleCss(pathToFolderWithStyles, pathToDist);
