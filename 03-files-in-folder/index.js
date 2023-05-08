@@ -18,7 +18,7 @@ fs.readdir(pathToFolder, { withFileTypes: true }, (err, files) => {
       filesData.push({
         name: fileData.name,
         ext: fileData.ext.slice(1),
-        size: `${stats.size} bite`,
+        size: `${stats.size} byte`,
       });
     });
   })
