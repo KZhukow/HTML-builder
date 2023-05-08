@@ -1,5 +1,4 @@
 const path = require('path');
-const fs = require('fs');
 const fsp = require('fs').promises;
 
 const pathToDist = path.join(__dirname, 'project-dist');
